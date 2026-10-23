@@ -1,0 +1,7 @@
+{
+  "name": "VoltPulse Auto Electric & Computer Diagnostics",
+  "description": "Specialized auto electrical repairs, ECU programming, wiring harness overhauls, and advanced computer diagnostics for modern and performance vehicles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
