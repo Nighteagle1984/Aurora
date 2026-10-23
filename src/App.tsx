@@ -14,6 +14,7 @@ import { BookingModal } from './components/BookingModal';
 import { ServiceItem } from './types';
 import { Phone, Calendar } from 'lucide-react';
 import { WORKSHOP_INFO } from './data/mockData';
+import carGarageBg from './assets/images/car_garage_blurred_windows_1790874981033.jpg';
 
 function MainApp() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -45,7 +46,7 @@ function MainApp() {
       {/* Persistent Full-Time Background: Car in garage with open hood, open doors, and blurred windows */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <img
-          src="/src/assets/images/car_garage_blurred_windows_1790874981033.jpg"
+          src={carGarageBg}
           alt="Performance car in garage workshop with open hood, open doors, and blurred tinted windows"
           className="w-full h-full object-cover object-center scale-[1.08] filter blur-[10px] brightness-[0.41] contrast-[1.08] saturate-[0.95]"
           referrerPolicy="no-referrer"

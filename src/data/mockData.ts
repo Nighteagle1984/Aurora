@@ -1,4 +1,8 @@
 import { ServiceItem, ProjectItem, DiagnosticCode } from '../types';
+import projWiringImg from '../assets/images/project_wiring_harness_1791307787330.jpg';
+import projEcuImg from '../assets/images/ecu_diagnostics_woman_1792080516769.jpg';
+import projStarlightImg from '../assets/images/starlight_ambient_interior_1790797925217.jpg';
+import projAlternatorImg from '../assets/images/starter_alternator_rebuild_1792080710640.jpg';
 
 export const WORKSHOP_INFO = {
   name: 'Aurora Electric',
@@ -141,7 +145,7 @@ export const PROJECTS: ProjectItem[] = [
     category: 'wiring',
     vehicle: '1998 Porsche 911 (993 Turbo) & Track Spec GT3',
     year: 1998,
-    image: '/src/assets/images/project_wiring_harness_1791307787330.jpg',
+    image: projWiringImg,
     briefDescription: 'Complete harness overhaul following rodent damage and brittle wire degradation, built with motorsport-grade Raychem DR-25 heat shrink and gold-plated Deutsch pins.',
     technicalDetails: 'Reconstructed 148 circuit terminations, installed auxiliary relay power distribution module, and eliminated 3 critical ground loops causing ignition misfires.',
     solution: 'Engine bay now features 100% moisture-sealed mil-spec harnesses with labelled circuit breakouts, restoring factory throttle telemetry and zero resistance drop.',
@@ -153,7 +157,7 @@ export const PROJECTS: ProjectItem[] = [
     category: 'ecu',
     vehicle: '2021 BMW M4 Competition (G82)',
     year: 2021,
-    image: '/src/assets/images/ecu_diagnostics_woman_1792080516769.jpg',
+    image: projEcuImg,
     briefDescription: 'Resolved erratic intermittent total bus shutdown (U0001 / U0100) triggered by pinched gateway harness under rear subframe.',
     technicalDetails: 'Used 4-channel PicoScope to isolate high-speed CAN-H / CAN-L waveform clipping; micro-soldered damaged bus termination resistor and flashed updated ECU firmware.',
     solution: 'Restored stable 2.5V recessive / 3.5V dominant differential signal, eliminated 18 false trouble codes, and re-synchronized active differential control unit.',
@@ -165,7 +169,7 @@ export const PROJECTS: ProjectItem[] = [
     category: 'infotainment',
     vehicle: '2021 Mercedes-AMG C63S & Rolls-Royce Spec',
     year: 2021,
-    image: '/src/assets/images/starlight_ambient_interior_1790797925217.jpg',
+    image: projStarlightImg,
     briefDescription: 'Custom 1,200-point fiber-optic starlight headliner with dual shooting star engines and 64-color acrylic active ambient lighting integration.',
     technicalDetails: 'Hand-routed individual optical fibers through reinforced Alcantara headliner, wired noise-isolated 12V voltage step-downs, and synced with factory COMAND ambient bus.',
     solution: 'Mesmerizing starry night ceiling with authentic constellation layout, whisper-quiet motor operation, and full factory steering wheel button control.',
@@ -177,7 +181,7 @@ export const PROJECTS: ProjectItem[] = [
     category: 'starter-alternator',
     vehicle: '2020 Ford F-350 Super Duty 6.7L Powerstroke',
     year: 2020,
-    image: '/src/assets/images/starter_alternator_rebuild_1792080710640.jpg',
+    image: projAlternatorImg,
     briefDescription: 'Upgraded dual charging system with 320-amp high-output hairpin alternator to support remote emergency work gear and onboard AC inverters.',
     technicalDetails: 'Balanced custom heavy copper rotor, replaced diode bridge with low-forward-drop Schottky rectifiers, and upgraded 0-gauge engine bay bonding cables.',
     solution: 'Delivers a rock-steady 14.4V at idle under full 220A auxiliary accessory load with zero voltage sag.',

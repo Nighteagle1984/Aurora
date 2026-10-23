@@ -5,12 +5,12 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    // Automatically uses '/Aurora/' for GitHub Pages deployment in GitHub Actions, and '/' for local/AI Studio dev server
-    base: process.env.GITHUB_ACTIONS ? '/Aurora/' : '/',
+    // Relative base path ensures GitHub Pages works regardless of repository name, subpath, or custom domain
+    base: './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(import.meta.dirname || '.', '.'),
       },
     },
     server: {

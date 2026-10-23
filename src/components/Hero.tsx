@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Calendar, ShieldCheck, Activity, Clock } from 'lucide-react';
 import { WORKSHOP_INFO } from '../data/mockData';
 import { useLanguage } from '../context/LanguageContext';
+import heroImg from '../assets/images/hero_auto_electric_diagnostic_1791307803639.jpg';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -79,7 +80,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               {/* Generated Image Asset */}
               <div className="relative aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/11] overflow-hidden bg-neutral-900">
                 <img
-                  src="/src/assets/images/hero_auto_electric_diagnostic_1791307803639.jpg"
+                  src={heroImg}
                   alt="Master technician running advanced automotive oscilloscope and OBD-II diagnostics"
                   className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700 ease-out"
                   referrerPolicy="no-referrer"

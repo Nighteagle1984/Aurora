@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Calendar, Menu, X, ShieldCheck, Globe } from 'lucide-react';
 import { WORKSHOP_INFO } from '../data/mockData';
 import { useLanguage } from '../context/LanguageContext';
+import auroraLogo from '../assets/images/aurora_brand_logo_1791228348388.jpg';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -27,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
           >
             <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-22 lg:h-22 rounded-full overflow-hidden p-0.5 ring-2 ring-red-500/60 shadow-[0_0_24px_rgba(239,68,68,0.4)] shrink-0 group-hover:ring-cyan-400/80 group-hover:shadow-[0_0_32px_rgba(6,182,212,0.5)] transition-all duration-300 bg-neutral-950">
               <img
-                src="/src/assets/images/aurora_brand_logo_1791228348388.jpg"
+                src={auroraLogo}
                 alt="Aurora Auto Electrics Logo"
                 className="w-full h-full object-cover rounded-full"
                 referrerPolicy="no-referrer"
