@@ -10,6 +10,8 @@ export const WORKSHOP_INFO = {
   tagline: 'Aurora Electric · Advanced Auto Electrical & Diagnostic Services',
   phone: '+389 72 554 701',
   phoneRaw: '+38972554701',
+  whatsappNumber: '38972554701',
+  whatsappUrl: 'https://wa.me/38972554701',
   email: 'service@auroraelectricauto.com',
   address: 'Studeniçan',
   cityStateZip: 'Shkup 1050, Maqedonia e Veriut',

@@ -15,6 +15,7 @@ import { ServiceItem } from './types';
 import { Phone, Calendar } from 'lucide-react';
 import { WORKSHOP_INFO } from './data/mockData';
 import carGarageBg from './assets/images/car_garage_blurred_windows_1790874981033.jpg';
+import { WhatsAppIcon } from './utils/whatsapp';
 
 function MainApp() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -106,6 +107,20 @@ function MainApp() {
         onClose={() => setBookingModalOpen(false)}
         presetService={presetBookingService}
       />
+
+      {/* Floating WhatsApp Quick Contact Button */}
+      <a
+        href={WORKSHOP_INFO.whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+        className="fixed bottom-20 sm:bottom-6 right-5 z-40 flex items-center gap-2.5 px-4 py-3 bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs rounded-full shadow-[0_4px_25px_rgba(52,211,153,0.4)] hover:scale-105 active:scale-95 transition-all group border border-emerald-300/40"
+      >
+        <WhatsAppIcon className="w-5 h-5 fill-current" />
+        <span className="hidden md:inline font-sans">
+          {lang === 'sq' ? 'Bisedo në WhatsApp' : lang === 'mk' ? 'Пишете на WhatsApp' : 'Chat on WhatsApp'}
+        </span>
+      </a>
 
       {/* Mobile Sticky Quick Action Bar (adheres to 15% mobile sticky cap) */}
       <aside aria-label="Mobile quick actions" className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-neutral-950/95 backdrop-blur-md border-t border-neutral-800 p-2.5 flex items-center gap-2">

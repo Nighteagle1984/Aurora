@@ -4,6 +4,7 @@ import { WORKSHOP_INFO, SERVICES } from '../data/mockData';
 import { InteractiveMapPlaceholder } from './InteractiveMapPlaceholder';
 import { BookingFormData } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { buildWhatsAppBookingUrl, WhatsAppIcon } from '../utils/whatsapp';
 
 interface ContactBookingSectionProps {
   initialService?: string;
@@ -31,6 +32,7 @@ export const ContactBookingSection: React.FC<ContactBookingSectionProps> = ({ in
   const [submittedBooking, setSubmittedBooking] = useState<{
     referenceNumber: string;
     details: BookingFormData;
+    whatsappUrl: string;
   } | null>(null);
 
   const validate = (): boolean => {
@@ -75,12 +77,35 @@ export const ContactBookingSection: React.FC<ContactBookingSectionProps> = ({ in
     setIsSubmitting(true);
     setTimeout(() => {
       const ref = `AE-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const waUrl = buildWhatsAppBookingUrl({
+        ref,
+        fullName: formData.fullName,
+        phone: formData.phone,
+        email: formData.email,
+        vehicleYear: formData.vehicleYear,
+        vehicleMake: formData.vehicleMake,
+        vehicleModel: formData.vehicleModel,
+        serviceCategory: formData.serviceCategory,
+        preferredDate: formData.preferredDate,
+        preferredTimeSlot: formData.preferredTimeSlot,
+        urgency: formData.urgency,
+        description: formData.description,
+        lang,
+      });
+
       setSubmittedBooking({
         referenceNumber: ref,
         details: { ...formData },
+        whatsappUrl: waUrl,
       });
       setIsSubmitting(false);
-    }, 700);
+
+      try {
+        window.open(waUrl, '_blank');
+      } catch {
+        // Handled by UI button
+      }
+    }, 600);
   };
 
   const handleReset = () => {
@@ -262,13 +287,36 @@ export const ContactBookingSection: React.FC<ContactBookingSectionProps> = ({ in
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="px-6 py-2.5 text-xs font-bold text-neutral-950 bg-cyan-400 hover:bg-cyan-300 rounded-lg transition-colors"
-                >
-                  {t.contact.submitAnother}
-                </button>
+                {/* WhatsApp Action Card */}
+                <div className="pt-2 max-w-md mx-auto space-y-3">
+                  <a
+                    href={submittedBooking.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl text-sm font-bold text-neutral-950 bg-emerald-400 hover:bg-emerald-300 active:bg-emerald-500 shadow-[0_0_24px_rgba(52,211,153,0.35)] transition-all"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 fill-current" />
+                    <span>{lang === 'sq' ? 'Hap & Dërgo në WhatsApp' : lang === 'mk' ? 'Отвори & Испрати на WhatsApp' : 'Open & Send via WhatsApp'}</span>
+                  </a>
+
+                  <p className="text-[11px] text-neutral-400">
+                    {lang === 'sq'
+                      ? 'Një dritare e WhatsApp u hap automatikisht për ta njoftuar servisin. Nëse dritarja u bllokua, klikoni butonin e gjelbër më lart.'
+                      : lang === 'mk'
+                      ? 'Прозорецот на WhatsApp се отвори автоматски. Доколку беше блокиран, кликнете на зеленото копче погоре.'
+                      : 'A WhatsApp window has been opened to alert our workshop. If it was blocked, click the green button above.'}
+                  </p>
+                </div>
+
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="px-6 py-2.5 text-xs font-semibold text-neutral-400 hover:text-white bg-neutral-900 border border-neutral-800 rounded-lg transition-colors"
+                  >
+                    {t.contact.submitAnother}
+                  </button>
+                </div>
               </div>
             ) : (
               /* Booking & Inquiry Form */
@@ -599,6 +647,18 @@ export const ContactBookingSection: React.FC<ContactBookingSectionProps> = ({ in
                       </>
                     )}
                   </button>
+                </div>
+
+                {/* WhatsApp Notification Direct Note */}
+                <div className="flex items-center justify-center gap-2 text-xs text-emerald-400 font-medium">
+                  <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />
+                  <span>
+                    {lang === 'sq'
+                      ? 'Njoftim i menjëhershëm direkt në WhatsApp te stafi ynë (+389 72 554 701)'
+                      : lang === 'mk'
+                      ? 'Инстантно известување на WhatsApp до нашиот тим (+389 72 554 701)'
+                      : 'Instant notification sent directly to our WhatsApp (+389 72 554 701)'}
+                  </span>
                 </div>
 
                 {/* Privacy / terms notice */}

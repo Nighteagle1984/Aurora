@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Phone, CheckCircle2, Send, ShieldCheck } from 'lucide-react';
 import { WORKSHOP_INFO } from '../data/mockData';
 import { useLanguage } from '../context/LanguageContext';
+import { buildWhatsAppBookingUrl, WhatsAppIcon } from '../utils/whatsapp';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -25,6 +26,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, pre
   });
 
   const [submittedRef, setSubmittedRef] = useState<string | null>(null);
+  const [whatsappUrl, setWhatsappUrl] = useState<string>('');
   const [errorMsg, setErrorMsg] = useState('');
 
   if (!isOpen) return null;
@@ -37,7 +39,28 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, pre
     }
 
     const ref = `AE-BOOK-${Math.floor(100000 + Math.random() * 900000)}`;
+    const waUrl = buildWhatsAppBookingUrl({
+      ref,
+      fullName: formData.fullName,
+      phone: formData.phone,
+      email: formData.email,
+      vehicleYear: formData.vehicleYear,
+      vehicleMake: formData.vehicleMake,
+      vehicleModel: formData.vehicleModel,
+      serviceCategory: formData.serviceCategory,
+      preferredDate: formData.preferredDate,
+      description: formData.issueSummary,
+      lang,
+    });
+
     setSubmittedRef(ref);
+    setWhatsappUrl(waUrl);
+
+    try {
+      window.open(waUrl, '_blank');
+    } catch {
+      // Handled by UI button
+    }
   };
 
   return (
@@ -84,6 +107,26 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, pre
               <div><span className="text-neutral-500">Vehicle:</span> {formData.vehicleYear} {formData.vehicleMake} {formData.vehicleModel}</div>
               <div><span className="text-neutral-500">Service:</span> {formData.serviceCategory}</div>
               <div><span className="text-neutral-500">Workshop:</span> {WORKSHOP_INFO.address}, {WORKSHOP_INFO.cityStateZip}</div>
+            </div>
+
+            {/* WhatsApp notification action */}
+            <div className="pt-2 space-y-2">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-xs font-bold text-neutral-950 bg-emerald-400 hover:bg-emerald-300 active:bg-emerald-500 shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all"
+              >
+                <WhatsAppIcon className="w-4 h-4 fill-current" />
+                <span>{lang === 'sq' ? 'Hap & Dërgo në WhatsApp' : lang === 'mk' ? 'Отвори & Испрати на WhatsApp' : 'Open & Send via WhatsApp'}</span>
+              </a>
+              <p className="text-[11px] text-neutral-400 text-center">
+                {lang === 'sq'
+                  ? 'Një dritare e WhatsApp u hap automatikisht për ta njoftuar stafin tonë (+389 72 554 701).'
+                  : lang === 'mk'
+                  ? 'Прозорецот на WhatsApp се отвори автоматски за да го извести нашиот тим (+389 72 554 701).'
+                  : 'A WhatsApp chat has opened automatically to alert our technicians (+389 72 554 701).'}
+              </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
@@ -251,7 +294,18 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, pre
               </button>
             </div>
 
-            <div className="flex items-center justify-center gap-2 text-[11px] text-neutral-400 pt-1">
+            <div className="flex items-center justify-center gap-2 text-xs text-emerald-400 font-medium">
+              <WhatsAppIcon className="w-3.5 h-3.5 fill-current shrink-0" />
+              <span>
+                {lang === 'sq'
+                  ? 'Njoftim i menjëhershëm direkt në WhatsApp (+389 72 554 701)'
+                  : lang === 'mk'
+                  ? 'Инстантно известување на WhatsApp (+389 72 554 701)'
+                  : 'Instant notification sent via WhatsApp (+389 72 554 701)'}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-center gap-2 text-[11px] text-neutral-400">
               <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
               <span>{t.contact.termsNote}</span>
             </div>
